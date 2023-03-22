@@ -4,25 +4,27 @@ function casadifyDirectOptimizer(obj)
 
 % Construct the casadi cost functions
 obj.casadifyCostFunctionVector();
-% Get the number of cost functions
-m = obj.numCostFunctions();
-% Construct the casadi parameters
-obj.cas_costfunctionparameters = obj.opti.parameter(m, 1);
+% Construct the cst function parameters
+obj.casadifyDirectParameters();
 
-% Call right casadifyer
+% Unconstrained casadifying
 if strcmpi(obj.type, obj.TYPE_UNCONSTRAINED)
     % Construct the direct optimizer problem
     obj.constructDirectProblemUnconstrained();
     return
 end
+
+% Equality constrained casadifying
 if strcmpi(obj.type, obj.TYPE_EQUALITYCONSTRAINED)
     obj.casadifyInverseOptimizerEqualityConstrained();
     return
 end
+
 if strcmpi(obj.type, obj.TYPE_INEQUALITYCONSTRAINED)
     obj.casadifyInverseOptimizerInequalityConstrained();
     return
 end
+
 if strcmpi(obj.type, obj.TYPE_CONSTRAINED)
     obj.casadifyInverseOptimizerConstrained();
     return
