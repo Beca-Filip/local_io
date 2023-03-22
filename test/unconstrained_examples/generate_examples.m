@@ -110,9 +110,9 @@ for ex = 1 : nexamples
     examples(end).xarrio = xarrio;
         
     % Get the shape of the set of parametric minima
-    minimizersShape = alphaShape(xarr(1, :).', xarr(2, :).');
-    alphaRadius = criticalAlpha(minimizersShape, 'one-region');    
-    minimizersShape = alphaShape(xarr(1, :).', xarr(2, :).', alphaRadius);
+    minimizersShape = alphaShape(xarr(1, :).', xarr(2, :).', 10);
+%     alphaRadius = criticalAlpha(minimizersShape, 'one-region');    
+%     minimizersShape = alphaShape(xarr(1, :).', xarr(2, :).', alphaRadius);
     
     % Get colormaps
     cmap1 = linspecer(m);
@@ -135,4 +135,5 @@ for ex = 1 : nexamples
         % Plot the projection of the measured input
         plot(xarrio(1, nmeas), xarrio(2, nmeas), '^', 'Color', cmap2(nmeas, :), 'DisplayName', sprintf("$x_{%d}$", nmeas), 'MarkerSize', 12, 'MarkerFaceColor', cmap2(nmeas, :));
     end
+    exportgraphics(gcf, sprintf("unconstrained-one-shot-ioc-%02d.png", ex), "ContentType", "Image", "Resolution", 300);
 end
