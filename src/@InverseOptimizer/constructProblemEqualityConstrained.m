@@ -10,7 +10,9 @@ obj.opti.subject_to( ...
 (obj.cas_do_costfunctionvectorjacobian.' * obj.cas_do_costfunctionparameters ...
 + obj.cas_do_eqconstraintvectorjacobian.' * obj.cas_do_eqconstraintmultipliers) == 0);
 % Set the optimality constraint of the DO (Primal feasibility)
-obj.opti.subject_to(obj.cas_do_eqconstraintvector == 0);
+if ~isempty(obj.do_eqconstraintvector)
+    obj.opti.subject_to(obj.cas_do_eqconstraintvector == 0);
+end
 
 % Set the constraints on the parameters
 obj.opti.subject_to(obj.cas_io_constraints <= 0);
