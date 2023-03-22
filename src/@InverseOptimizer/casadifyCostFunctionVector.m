@@ -17,7 +17,7 @@ for numCostFunction = 1 : m
     obj.do_costfunctionvector{numCostFunction}(obj.cas_do_variables);
 end
 
-% Use casadi to compute the jacobian of the cost function vector
+% Allocate the jacobian of the cost function vector
 obj.cas_do_costfunctionvectorjacobian = casadi.MX.zeros(m, n);
 % Allocate the stacked casadi cost function hessians
 obj.cas_do_costfunctionvectorstackedhessians = casadi.MX.zeros(n, n*m);
