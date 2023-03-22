@@ -130,13 +130,15 @@ classdef InverseOptimizer < handle
     
     methods
         % Information retrievers
-        m = numCostFunctions(obj)
+        m = numCostFunctions(obj);
+        m = numEqualityConstraints(obj);
         
         % Initializer
         initializerInverseOptimizer(obj);
         
         % Adders
         adderCostFunction(obj, callableFun);
+        adderEqualityConstraintFunction(obj, callableFun);
         
         % Setters
         setterLossFunction(obj, callableFun);        
@@ -153,5 +155,10 @@ classdef InverseOptimizer < handle
         casadifyLossFunctionUnconstrained(obj);
         constructProblemUnconstrained(obj);
         casadifyInverseConstraintsUnconstrained(obj);
+        % Equality constrained functions
+        casadifyEqualityConstraintFunction(obj);
+        casadifyInverseVariablesEqualityConstrained(obj);
+        casadifyLossFunctionEqualityConstrained(obj);
+        constructProblemEqualityConstrained(obj);
     end
 end

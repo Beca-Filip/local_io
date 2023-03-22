@@ -5,22 +5,35 @@ function casadifyInverseOptimizer(obj)
 % Construct the casadi cost functions
 obj.casadifyCostFunctionVector();
 
-% Call right casadifyer
+% Unconstrained casadifying
 if strcmpi(obj.do_type, obj.DO_TYPE_UNCONSTRAINED)
     % Construct the casadi cost function parameters
     obj.casadifyInverseVariablesUnconstrained();
     % Casadify loss function
-    obj.casadifyLossFunctionUnconstrained();   
+    obj.casadifyLossFunctionUnconstrained();
     % Construct the inverse constraints
     obj.casadifyInverseConstraintsUnconstrained();
     % Construct the inverse optimizer problem
     obj.constructProblemUnconstrained();
     return
 end
+
+% Equality constrained casadifying
 if strcmpi(obj.do_type, obj.DO_TYPE_EQUALITYCONSTRAINED)
-    obj.casadifyInverseOptimizerEqualityConstrained();
+    % Construct the casadi equality constraint functions
+    obj.casadifyEqualityConstraintFunction()
+    % Construct the casadi cost function parameters and lagrangian
+    % multipliers
+    obj.casadifyInverseVariablesEqualityConstrained();
+    % Casadify the loss function
+    obj.casadifyLossFunctionEqualityConstrained();
+    % Construct the inverse constraints
+    obj.casadifyInverseConstraintsUnconstrained();
+    % Construct the inverse optimizer problem
+    obj.constructProblemEqualityConstrained();
     return
 end
+
 if strcmpi(obj.do_type, obj.DO_TYPE_INEQUALITYCONSTRAINED)
     obj.casadifyInverseOptimizerInequalityConstrained();
     return
