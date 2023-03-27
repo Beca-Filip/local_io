@@ -82,7 +82,8 @@ classdef InverseOptimizer < handle
         cas_io_lossfunction(:, 1)
         % The casadi IO constraint functions
         cas_io_constraints(:, 1)
-        
+        % The casadi DO optimality conditions
+        cas_io_dooptimality(:, 1)
     end
 
     methods
@@ -155,10 +156,12 @@ classdef InverseOptimizer < handle
         casadifyLossFunctionUnconstrained(obj);
         constructProblemUnconstrained(obj);
         casadifyInverseConstraintsUnconstrained(obj);
+        casadifyDirectOptimalityUnconstrained(obj);
         % Equality constrained functions
         casadifyEqualityConstraintFunction(obj);
         casadifyInverseVariablesEqualityConstrained(obj);
         casadifyLossFunctionEqualityConstrained(obj);
         constructProblemEqualityConstrained(obj);
+        casadifyDirectOptimalityEqualityConstrained(obj);
     end
 end

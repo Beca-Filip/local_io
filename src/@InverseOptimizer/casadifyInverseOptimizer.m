@@ -13,6 +13,8 @@ if strcmpi(obj.do_type, obj.DO_TYPE_UNCONSTRAINED)
     obj.casadifyLossFunctionUnconstrained();
     % Construct the inverse constraints
     obj.casadifyInverseConstraintsUnconstrained();
+    % Casadify DO optimality
+    obj.casadifyDirectOptimalityUnconstrained();
     % Construct the inverse optimizer problem
     obj.constructProblemUnconstrained();
     return
@@ -29,6 +31,8 @@ if strcmpi(obj.do_type, obj.DO_TYPE_EQUALITYCONSTRAINED)
     obj.casadifyLossFunctionEqualityConstrained();
     % Construct the inverse constraints
     obj.casadifyInverseConstraintsUnconstrained();
+    % Casadify DO optimality
+    obj.casadifyDirectOptimalityEqualityConstrained();
     % Construct the inverse optimizer problem
     obj.constructProblemEqualityConstrained();
     return
