@@ -108,12 +108,14 @@ classdef DirectOptimizer < handle
     methods
         % Information retrievers
         m = numCostFunctions(obj)
+        m = numEqualityConstraints(obj);
         
         % Initializer
         initializerDirectOptimizer(obj);
         
         % Adders
         adderCostFunction(obj, callableFun);
+        adderEqualityConstraintFunction(obj, callableFun);
         
         % Casadi-related functions
         casadifyDirectOptimizer(obj);
@@ -123,7 +125,13 @@ classdef DirectOptimizer < handle
     end
     
     methods (Access = private)
+        % General functions
+        casadifyDirectParameters(obj);
+        casadifyCostFunctionVector(obj);
+        casadifyEqualityConstraintVector(obj);
         % Casadi-related functions
         constructDirectProblemUnconstrained(obj);
+        constructDirectProblemEqualityConstrained(obj);
+        
     end
 end

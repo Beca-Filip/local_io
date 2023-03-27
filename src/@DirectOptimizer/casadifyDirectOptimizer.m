@@ -16,7 +16,10 @@ end
 
 % Equality constrained casadifying
 if strcmpi(obj.type, obj.TYPE_EQUALITYCONSTRAINED)
-    obj.casadifyInverseOptimizerEqualityConstrained();
+    % Casadify the equality constraints
+    obj.casadifyEqualityConstraintVector();
+    % Construct the direct optimizer problem
+    obj.constructDirectProblemEqualityConstrained();
     return
 end
 
